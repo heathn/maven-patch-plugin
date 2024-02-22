@@ -86,6 +86,13 @@ public class ApplyMojo
     }
 
     /**
+     * The name of the patch executable.  It could be only the executable name or an absolute path.  If it is only the
+     * executable name, the program's location is expected to be in the path.
+     */
+    @Parameter( defaultValue = "patch" )
+    private String cmd;
+
+    /**
      * Whether to exclude default ignored patch items, such as <code>.svn</code> or <code>CVS</code> directories.
      */
     @Parameter( defaultValue = "true" )
@@ -572,7 +579,7 @@ public class ApplyMojo
     {
         Commandline cli = new Commandline();
 
-        cli.setExecutable( "patch" );
+        cli.setExecutable( cmd );
 
         cli.setWorkingDirectory( targetDirectory.getAbsolutePath() );
 
